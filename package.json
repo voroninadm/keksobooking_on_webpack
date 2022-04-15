@@ -2,7 +2,7 @@
   "name": "keksobooking",
   "version": "25.0.0",
   "private": true,
-  "description": "Личный проект «Кексобукинг» от HTML Academy",
+  "description": "Личный проект «Кексобукинг» от HTML Academy с самостоятельным переносом на Webpack",
   "repository": {
     "type": "git",
     "url": "git@github.com:htmlacademy-javascript/1790721-keksobooking-25.git"
