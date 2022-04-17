@@ -1,6 +1,8 @@
 import '../css/normalize.css';
 import '../css/style.css';
 
+//import * as Pristine from 'pristine.js'  -- попробовать перенести библиотеки
+
 import {toggleFormToUnactive} from './form.js';
 import {toggleMapFiltersToUnactive, checkAdsFiltering} from './form-filter.js';
 import {mapInit, renderMarkers} from './map.js';

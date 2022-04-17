@@ -1,8 +1,11 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
@@ -64,22 +67,21 @@ module.exports = {
             to: path.resolve(__dirname, 'build/pristine')
           },
         ]
-    })
+    }),
   ],
 
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            // hmr: IsDev
-          }
-          },
-           "css-loader"], //применение справа-налево
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"], //применение справа-налево
       },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new CssMinimizerWebpackPlugin(),
+      new TerserWebpackPlugin()
     ],
   },
 };
