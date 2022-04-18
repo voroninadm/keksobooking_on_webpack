@@ -3,8 +3,8 @@
   "private": true,
   "description": "Личный проект «Кексобукинг» от HTML Academy с самостоятельным переносом на Webpack",
   "devDependencies": {
+    "autoprefixer": "^10.4.4",
     "browser-sync": "2.27.7",
-    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "10.2.4",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",

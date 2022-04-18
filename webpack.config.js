@@ -1,14 +1,12 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 
 const isDev = process.env.NODE_ENV === 'development';
-const isProd = !isDev;
 
 console.log(`Development mode is: ${isDev}`);
 
@@ -16,13 +14,11 @@ module.exports = {
   context: path.resolve(__dirname, 'source'),
   entry: {
     main: './js/main.js',
-    // leaflet: './leaflet/leaflet.js',
-    // nouislider: './nouislider/nouislider.js',
-    // pristine: './pristine/pristine.min.js'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js',
+    clean: true
   },
   devServer: {
     static: {
@@ -35,14 +31,10 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: './index.html',
-      // minify: {                            -- webpack already minify html
-      //   collapseWhitespace: isProd
-      // }
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
     }),
-    new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns:
         [
@@ -55,21 +47,12 @@ module.exports = {
             to: path.resolve(__dirname, 'build/data')
           },
           {
-            from: path.resolve(__dirname, 'source/leaflet'),
-            to: path.resolve(__dirname, 'build/leaflet')
-          },
-          {
-            from: path.resolve(__dirname, 'source/nouislider'),
-            to: path.resolve(__dirname, 'build/nouislider')
-          },
-          {
-            from: path.resolve(__dirname, 'source/pristine/'),
-            to: path.resolve(__dirname, 'build/pristine')
+            from: path.resolve(__dirname, 'source/favicon.ico'),
+            to: path.resolve(__dirname, 'build/favicon.ico')
           },
         ]
     }),
   ],
-
   module: {
     rules: [
       {

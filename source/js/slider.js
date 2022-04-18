@@ -1,3 +1,5 @@
+import noUiSlider from '../nouislider/nouislider.js';
+
 const sliderElement = document.querySelector('.ad-form__slider');
 const priceField = document.querySelector('[name="price"]');
 

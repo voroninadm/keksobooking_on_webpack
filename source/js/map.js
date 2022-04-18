@@ -1,3 +1,5 @@
+import L from '../leaflet/leaflet.js';
+
 import { getPopup } from './popup.js';
 
 const latLngField = document.querySelector('[name="address"]');
