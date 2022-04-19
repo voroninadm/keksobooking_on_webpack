@@ -1,4 +1,5 @@
-import './pristine-config-ru.js';
+import * as Pristine from '../pristine/pristine.min.js';
+
 import { OfferTypeToPrice, ROOMS_CAPACITYS } from './form-data.js';
 import { sliderInit, sliderReset } from './slider.js';
 import { mapReset, closeMapPopup } from './map.js';
@@ -20,7 +21,23 @@ const capacity = mainForm.querySelector('[name="capacity"]');
 const resetButton = mainForm.querySelector('[type="reset"]');
 const submitButton = mainForm.querySelector('[type="submit"]');
 
+Pristine.addMessages('ru', {
+  required: 'Пожалуйста, заполните это поле!',
+  email: 'Пожалуйста, введите корректный адрес электронной почты!',
+  number: 'Пожалуйста, введите числовое значение!',
+  integer: 'Пожалуйста, введите целое числовое значение!',
+  url: 'Пожалуйста, введите корректный URL веб-сайта!',
+  tel: 'Пож default:алуйста, введите корректный номер телефона!',
+  maxlength: `Значение поля должно быть не более \${${1}} символов`,
+  minlength: `Значение поля должно быть не менее \${${1}} символов`,
+  min: `Минимальное значение - \${${1}}!`,
+  max: `Максимальное значение - \${${1}}!`,
+  pattern: 'Пожалуйста, введите значения в необходимом формате!',
+  equals: 'Ой! Значения не совпадают!',
+  default: 'Пожалуйста, введите корректное значение!'
+});
 
+Pristine.setLocale('ru');
 const pristine = new Pristine(mainForm, {
   classTo: 'ad-form__element--validating',
   errorClass: 'ad-form__element--validating-danger',

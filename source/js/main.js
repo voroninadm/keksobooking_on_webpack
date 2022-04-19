@@ -1,3 +1,5 @@
+import './components.js';
+
 import {toggleFormToUnactive} from './form.js';
 import {toggleMapFiltersToUnactive, checkAdsFiltering} from './form-filter.js';
 import {mapInit, renderMarkers} from './map.js';

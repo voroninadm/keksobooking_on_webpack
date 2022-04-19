@@ -81,13 +81,19 @@ fieldset {
           flex-direction: column;
 
   overflow: hidden;
+
+  &__canvas {
+    width: 100%;
+    height: 500px;
+    background-color: #dddddd;
+  }
 }
 
-.map__canvas {
+/* .map__canvas {
   width: 100%;
   height: 500px;
   background-color: #dddddd;
-}
+} */
 
 
 /**

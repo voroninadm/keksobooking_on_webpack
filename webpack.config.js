@@ -1,40 +1,71 @@
-const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+
+
+const isDev = process.env.NODE_ENV === 'development';
+
+console.log(`Development mode is: ${isDev}`);
 
 module.exports = {
   context: path.resolve(__dirname, 'source'),
   entry: {
     main: './js/main.js',
-    leaflet: './leaflet/leaflet.js',
-    nouislider: './nouislider/nouislider.js',
-    pristine: './pristine/pristine.min.js'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js',
+    clean: true
   },
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
-    openPage: './index.html',
+    static: {
+      directory: path.join(__dirname, 'build'),
+    },
+    compress: true,
+    port: 9000
   },
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: './index.html'
+      template: './index.html',
+      inject: 'body'
     }),
-    new MiniCssExtractPlugin(),
-    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    }),
+    new CopyWebpackPlugin({
+      patterns:
+        [
+          {
+            from: path.resolve(__dirname, 'source/img/'),
+            to: path.resolve(__dirname, 'build/img')
+          },
+          {
+            from: path.resolve(__dirname, 'source/data/'),
+            to: path.resolve(__dirname, 'build/data')
+          },
+          {
+            from: path.resolve(__dirname, 'source/favicon.ico'),
+            to: path.resolve(__dirname, 'build/favicon.ico')
+          },
+        ]
+    }),
   ],
-
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"], //применение справа-налево
       },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new CssMinimizerWebpackPlugin(),
+      new TerserWebpackPlugin()
     ],
   },
 };
