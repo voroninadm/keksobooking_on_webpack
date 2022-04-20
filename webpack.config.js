@@ -9,13 +9,20 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const isDev = process.env.NODE_ENV === 'development';
 console.log(`Development mode is: ${isDev}`);
 
+let mode = 'development';
+if (process.env.NODE_ENV === 'production') {
+  mode = 'production'
+}
+
 module.exports = {
+  // mode: mode,
   context: path.resolve(__dirname, 'source'),
   entry: {
     main: './js/main.js',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
+    assetModuleFilename: 'assets/[name][ext]',
     filename: '[name].[contenthash].js',
     clean: true
   },
@@ -28,7 +35,7 @@ module.exports = {
   },
 
   plugins: [
-    new HTMLWebpackPlugin({
+    new HTMLWebpackPlugin({ // --scripts to append--
       template: './index.html',
       inject: 'body'
     }),
@@ -38,10 +45,11 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns:
         [
-          {
-            from: path.resolve(__dirname, 'source/img/'),
-            to: path.resolve(__dirname, 'build/img')
-          },
+          // --simple img copy--
+          // {
+          //   from: path.resolve(__dirname, 'source/img/'),
+          //   to: path.resolve(__dirname, 'build/img')
+          // },
           {
             from: path.resolve(__dirname, 'source/data/'),
             to: path.resolve(__dirname, 'build/data')
@@ -56,12 +64,20 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/, // --parse img inline--
+        loader: "html-loader"
+      },
+      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"], //применение справа-налево
       },
+      // {
+        // test: /\.(png|svg|jpg|jpeg|gif)$/,
+        // type : 'asset/resource'
+
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        type: "asset",
+        type: "asset/resource",
         use: [
           {
             loader: ImageMinimizerPlugin.loader,
@@ -70,23 +86,24 @@ module.exports = {
                 implementation: ImageMinimizerPlugin.imageminMinify,
                 options: {
                   plugins: [
-                    // "imagemin-gifsicle",
-                    // "imagemin-jpegtran",
-                    // "imagemin-optipng",
+                    "imagemin-gifsicle",
+                    "imagemin-jpegtran",
+                    "imagemin-optipng",
                     "imagemin-svgo",
                   ],
                 },
               },
             },
-          },
+          }
         ],
       },
+    // },
     ],
-  },
+},
   optimization: {
-    minimizer: [
-      new CssMinimizerWebpackPlugin(),
-      new TerserWebpackPlugin(),
-    ],
+  minimizer: [
+    new CssMinimizerWebpackPlugin(),
+    new TerserWebpackPlugin(),
+  ],
   },
 };

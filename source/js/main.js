@@ -1,4 +1,8 @@
-import './components.js';
+import '../leaflet/leaflet.css';
+import '../nouislider/nouislider.css';
+import '../css/normalize.css';
+import '../css/style.css';
+
 
 import {toggleFormToUnactive} from './form.js';
 import {toggleMapFiltersToUnactive, checkAdsFiltering} from './form-filter.js';
