@@ -4,10 +4,9 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 const isDev = process.env.NODE_ENV === 'development';
-
 console.log(`Development mode is: ${isDev}`);
 
 module.exports = {
@@ -60,12 +59,34 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"], //применение справа-налево
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        type: "asset",
+        use: [
+          {
+            loader: ImageMinimizerPlugin.loader,
+            options: {
+              minimizer: {
+                implementation: ImageMinimizerPlugin.imageminMinify,
+                options: {
+                  plugins: [
+                    // "imagemin-gifsicle",
+                    // "imagemin-jpegtran",
+                    // "imagemin-optipng",
+                    "imagemin-svgo",
+                  ],
+                },
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   optimization: {
     minimizer: [
       new CssMinimizerWebpackPlugin(),
-      new TerserWebpackPlugin()
+      new TerserWebpackPlugin(),
     ],
   },
 };
