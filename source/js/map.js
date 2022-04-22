@@ -25,13 +25,13 @@ const mainPinStartPosition = {
   lng: 139.75425
 };
 const mainPinIcon = L.icon({
-  iconUrl: './img/main-pin.svg',
+  iconUrl: require('../img/main-pin.svg'),
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
 
 const similarPinIcon = L.icon({
-  iconUrl: './img/pin.svg',
+  iconUrl: require('../img/pin.svg'),
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
