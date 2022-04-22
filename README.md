@@ -2,7 +2,7 @@
 
 My study Webpack build of "Keksobooking" by HTML Academy.
 
-Go to Keksobooking[https://voroninadm.github.io/keksobooking_on_webpack/]
+[Go to Keksobooking](https://voroninadm.github.io/keksobooking_on_webpack/)
 
 - PostCSS
 - Minimized assets
