@@ -1,3 +1,3 @@
 # keksobooking_on_webpack
 
-Trying to make a project on Webpack
+Cборка Webpack для проекта Кексобукинг от HTML Academy.
