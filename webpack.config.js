@@ -51,6 +51,10 @@ module.exports = {
           //   to: path.resolve(__dirname, 'build/img')
           // },
           {
+            from: path.resolve(__dirname, 'source/img/avatars'),
+            to: path.resolve(__dirname, 'build/img/avatars')
+          },
+          {
             from: path.resolve(__dirname, 'source/data/'),
             to: path.resolve(__dirname, 'build/data')
           },
@@ -71,10 +75,6 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"], //применение справа-налево
       },
-      // {
-        // test: /\.(png|svg|jpg|jpeg|gif)$/,
-        // type : 'asset/resource'
-
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         type: "asset/resource",
@@ -97,13 +97,13 @@ module.exports = {
           }
         ],
       },
-    // },
+      // },
     ],
-},
+  },
   optimization: {
-  minimizer: [
-    new CssMinimizerWebpackPlugin(),
-    new TerserWebpackPlugin(),
-  ],
+    minimizer: [
+      new CssMinimizerWebpackPlugin(),
+      new TerserWebpackPlugin(),
+    ],
   },
 };
