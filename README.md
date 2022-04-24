@@ -8,4 +8,5 @@ My study Webpack build of "Keksobooking" by HTML Academy.
 - Minimized assets
 - Parsing almost all assets in html, css, js files to the build
 - Local JSON with ads for fetch
+- JSdoc comments
 - Dev and Prod builds
