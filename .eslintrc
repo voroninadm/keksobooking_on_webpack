@@ -13,6 +13,6 @@ globals:
   L: readonly
   noUiSlider: readonly
   Pristine: readonly
+  require: true
 
-extends:
-  "htmlacademy/vanilla"
+extends: "htmlacademy/vanilla"

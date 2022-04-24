@@ -49,11 +49,18 @@ const checkFeatures = (ad) => {
   return false;
 };
 
-//main filter check function
+/**
+ * main filter check function
+ * @param {*} ads - array of ads
+ * @returns filtered array pf ads
+ */
 const checkAllFilters = (ads)  =>
   ads.filter((ad) => checkType(ad) && checkPrice(ad) && checkRooms(ad) && checkGuests(ad) && checkFeatures(ad)).slice(0, COUNT_OF_ADS);
 
-//filters disabling-activating
+/**
+ * main filter check function
+ * @param {*} isActive - boolean, true to unactive
+ */
 const toggleMapFiltersToUnactive = (isActive) => {
   mapFilters.classList.toggle('map__filters--disabled', isActive);
   for (const element of mapFiltersElements) {
@@ -66,15 +73,12 @@ const mapFiltersReset = () => {
   mapFilters.reset();
 };
 
-//handler. on filter change
-const checkChangeFilters = (cb) => {
-  mapFilters.addEventListener('change', () => {
-    clearMarkers();
-    cb(checkAllFilters());
-  });
-};
 
-//handler. filtering ads
+/**
+ * handler. filtering ads
+ * @param {*} array of ads
+ * @param {*} timeToDelay - number
+ */
 const checkAdsFiltering = (array, timeToDelay) => {
   mapFilters.addEventListener('change', debounce(() => {
     clearMarkers();
@@ -86,7 +90,6 @@ const checkAdsFiltering = (array, timeToDelay) => {
 export {
   checkAdsFiltering,
   toggleMapFiltersToUnactive,
-  checkChangeFilters,
   checkAllFilters,
   mapFiltersReset
 };

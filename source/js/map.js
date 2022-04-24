@@ -59,7 +59,10 @@ const checkMainPinMove = () => {
   });
 };
 
-//render markers template
+/**
+ * render single markers template
+ * @param {*} object - ad object
+ */
 const renderMarker = (object) => {
   const lat = object.location.lat;
   const lng = object.location.lng;
@@ -82,7 +85,10 @@ const renderMarker = (object) => {
       });
 };
 
-//render filtered markers from array
+/**
+ * render filtered markers from array
+ * @param {*} array - array of ads
+ */
 const renderMarkers = (array) => {
   array.forEach((element) => {
     renderMarker(element);
@@ -95,7 +101,10 @@ const clearMarkers = () => {
 };
 
 
-//map initialize
+/**
+ * map initialize
+ * @param {*} cb - for toggling form to active @see toggleFormToUnactive
+ */
 const mapInit = (cb) => {
   map.on('load', () => {
     renderMainPinToMap();

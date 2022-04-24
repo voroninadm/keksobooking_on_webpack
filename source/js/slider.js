@@ -3,6 +3,10 @@ import noUiSlider from '../nouislider/nouislider.js';
 const sliderElement = document.querySelector('.ad-form__slider');
 const priceField = document.querySelector('[name="price"]');
 
+/**
+ * init slider
+ * @param {*} cb - for validating function @see validate
+ */
 const sliderInit = (cb) => {
   noUiSlider.create(sliderElement, {
     range: {

@@ -21,6 +21,7 @@ const capacity = mainForm.querySelector('[name="capacity"]');
 const resetButton = mainForm.querySelector('[type="reset"]');
 const submitButton = mainForm.querySelector('[type="submit"]');
 
+//Pristine default messages set on Ru
 Pristine.addMessages('ru', {
   required: 'Пожалуйста, заполните это поле!',
   email: 'Пожалуйста, введите корректный адрес электронной почты!',
@@ -36,8 +37,9 @@ Pristine.addMessages('ru', {
   equals: 'Ой! Значения не совпадают!',
   default: 'Пожалуйста, введите корректное значение!'
 });
-
 Pristine.setLocale('ru');
+
+//Pristine make classes
 const pristine = new Pristine(mainForm, {
   classTo: 'ad-form__element--validating',
   errorClass: 'ad-form__element--validating-danger',
@@ -47,7 +49,11 @@ const pristine = new Pristine(mainForm, {
   errorTextClass: 'ad-form__element--validating-error'
 });
 
-// form disabling-activating
+
+/**
+ * form disabling-activating
+ * @param {*} value - boolean
+ */
 const toggleFormToUnactive = (value) => {
   mainForm.classList.toggle('ad-form--disabled', value);
   mainFormFieldsets.forEach((element) => {
@@ -63,7 +69,9 @@ const toggleFormToUnactive = (value) => {
   }
 };
 
-//form validating
+/**
+ * form validating
+ */
 const formValidating = () => {
 
   //on change house type
@@ -94,7 +102,11 @@ const formValidating = () => {
   });
 };
 
-//form initialization
+
+/**
+ * form toggle active/unactive
+ * @param {*} isActive - boolean
+ */
 const initForm = (isActive) => {
   toggleFormToUnactive(isActive);
   if (!isActive) {
@@ -102,7 +114,10 @@ const initForm = (isActive) => {
   }
 };
 
-//reset form to default
+
+/**
+ * reset form to default
+ */
 const resetFormToDefault = () => {
   mainForm.reset();
   priceField.placeholder = OfferTypeToPrice[typeOfHousesField.value];
@@ -115,17 +130,22 @@ const resetFormToDefault = () => {
   setImagesOnDefault();
 };
 
+//main form button blocking
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Публикую...';
 };
 
+//main form button unblocking
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';
 };
 
-//handler. form validating on submit
+/**
+ * handler. form validating on submit
+ * @param {*} cb - to make render default map markers @see renderMarkers
+ */
 const checkSubmitButton = (cb) => {
   mainForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -137,7 +157,10 @@ const checkSubmitButton = (cb) => {
   });
 };
 
-// handler. reset button
+/**
+ * handler. Reset button on click
+ * @param {*} cb -to make render default map markers @see renderMarkers
+ */
 const checkResetButton = (cb) => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();

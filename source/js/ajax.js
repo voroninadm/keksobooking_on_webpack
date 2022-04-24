@@ -7,7 +7,10 @@ import { resetFormToDefault } from './form.js';
 const GET_DATA_LOCAL_LINK = './data/data.json';
 const SEND_DATA_LINK = 'https://25.javascript.pages.academy/keksobooking';
 
-
+/**
+ * getting data from server
+ * @returns array of ads
+ */
 const getData = async () => {
   let response;
   try {
@@ -24,7 +27,12 @@ const getData = async () => {
   return allAds;
 };
 
-
+/**
+ * sending data to server
+ * @param {*} data -data from form inputs
+ * @param {*} unblockButton - unlock submit button on form
+ * @param {*} cb - to make render default map markers @see renderMarkers
+ */
 const sendData = async (data, unblockButton, cb) => {
   let request;
   try {
