@@ -1,3 +1,7 @@
+/**
+ * Function making a template to show map message error
+ * @param {*} message - text message
+ */
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 1000;
@@ -15,8 +19,19 @@ const showAlert = (message) => {
   document.body.append(alertContainer);
 };
 
+/**
+ * check if Esc is pressed on keyboard.
+ * works with handlers to close modal message on data sending
+ * @returns {boolean} boolean - was pressed Esc or another key
+ */
 const getIsEscapeKey = (evt) => evt.key === 'Escape';
 
+/**
+ * Standard debounce function
+ * @param {*} callback - here is a function to make debounce
+ * @param {*} timeoutDelay - number, time
+ * @returns function callback with time to wait
+ */
 const debounce = (callback, timeoutDelay) => {
   let timeoutId;
   return (...rest) => {

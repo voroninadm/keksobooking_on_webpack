@@ -15,7 +15,11 @@ const roomsWord = (value) => {
   return 'комната';
 };
 
-//creating new ads BY HTML TEMPLATE
+/**
+ * creating new ad BY HTML TEMPLATE
+ * @param {*} ad - ad object
+ * @returns ready html ad form to input to map
+ */
 const getPopup = (ad) => {
   const adItem = offerTemplate.cloneNode(true);
 
